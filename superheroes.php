@@ -63,14 +63,50 @@ $superheroes = [
   ], 
 ];
 
+
+
+    if (isset($_POST['query'])) {
+        $hero = array_search($_POST['query'], array_column($superheroes, 'name'));
+        if($hero!==false ){
+
+                $superhero=$superheroes[$hero];               
+                $alias=$superhero['alias'];
+                $name=$superhero['name'];
+                $bio=$superhero['biography'];
+                echo '<h3>'.$alias.'</h3>';
+                echo '<h4> AKA '.$name.'</h4>';
+                echo '<p>'.$bio.'</p>';
+                
+        }else{
+        $hero = array_search($_POST['query'], array_column($superheroes, 'alias'));
+          if($hero!==false ){
+                $superhero=$superheroes[$hero];               
+                $alias=$superhero['alias'];
+                $name=$superhero['name'];
+                $bio=$superhero['biography'];
+                echo '<h3>'.$alias.'</h3>';
+                echo '<h4 > AKA '.$name.'</h4>';
+                echo '<p>'.$bio.'</p>';
+         }
+         elseif ($_POST['query']===""){
+            echo '<ul>';
+            foreach ($superheroes as $superhero): 
+             echo '<li>'.$superhero['alias'].'</li>';
+            endforeach;
+            echo '</ul>';
+         }
+         else{
+            echo   "<h5>Superhero not found <h5>";
+         }
+       }
+       
+    }
+    else {    
+    echo '<ul>';
+     foreach ($superheroes as $superhero): 
+      echo '<li>'.$superhero['alias'].'</li>';
+     endforeach;
+     echo '</ul>';
+        
+    }
 ?>
-
-<ul>
-<?php foreach ($superheroes as $superhero): ?>
-  <li><?= $superhero['alias']; ?></li>
-<?php endforeach; ?>
-</ul>
-
-<?php foreach ($_POST as $search): ?>
-  <p><?= $superhero['alias']; ?></p>
-<?php endforeach; ?>
