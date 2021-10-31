@@ -8,8 +8,8 @@ window.onload = function ()
       {result.innerHTML=response;}
   
     }); 
-    search.addEventListener('click', function(event) {
-        event.preventDefault();
+    search.addEventListener('click', function(e) {
+        e.preventDefault();
         var search =document.getElementById("character-search").value;
         $.ajax({
           url: 'superheroes.php',
